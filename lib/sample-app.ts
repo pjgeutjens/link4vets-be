@@ -6,7 +6,6 @@ import * as ecsp from '@aws-cdk/aws-ecs-patterns';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as apig from '@aws-cdk/aws-apigatewayv2';
 import { platform } from 'os';
-import { DockerImage } from '@aws-cdk/core';
 
 
 
@@ -21,19 +20,15 @@ export class SampleApp extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: SampleAppProps) {
       super(scope, id);
 
-      const sampleAppDockerImage = DockerImage.fromBuild(path.join(__dirname, '..', 'containers', 'sample'), {
-        platform: "linux/amd64"
-      });
-
-      // const sampleAppDocker = new DockerImageAsset(this, 'SampleAppDockerAsset', {
-      //   directory: path.join(__dirname, '..', 'containers', 'sample'),
+      const sampleAppDocker = new DockerImageAsset(this, 'SampleAppDockerAsset', {
+        directory: path.join(__dirname, '..', 'containers', 'sample'),
         
-      // });
+      });
 
       const fargateService = new ecsp.ApplicationLoadBalancedFargateService(this, 'SampleAppService', {
         vpc: props.vpc,
         taskImageOptions: {
-          image: ecs.ContainerImage.fromRegistry(sampleAppDockerImage.image),
+          image: ecs.ContainerImage.fromDockerImageAsset(sampleAppDocker),
           environment: {
             SERVER_PORT: "80",
             API_BASE: props.api.url!
