@@ -1,0 +1,113 @@
+{
+  "version": "12.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "Link4VetsBeStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "Link4VetsBeStack.template.json",
+        "validateOnSynth": false
+      },
+      "metadata": {
+        "/Link4VetsBeStack/ImagesBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImagesBucket1E86AFB2",
+            "trace": [
+              "new Bucket (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/aws-s3/lib/bucket.ts:710:22)",
+              "new Link4VetsBeStack (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/lib/link4vets-be-stack.ts:8:26)",
+              "Object.<anonymous> (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/bin/link4vets-be.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/Link4VetsBeStack/ImagesBucketNameExport": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImagesBucketNameExport",
+            "trace": [
+              "new Link4VetsBeStack (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/lib/link4vets-be-stack.ts:12:5)",
+              "Object.<anonymous> (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/bin/link4vets-be.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/Link4VetsBeStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata",
+            "trace": [
+              "new MetadataResource (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:22:24)",
+              "/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:140:5",
+              "visit (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:202:5)",
+              "visit (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:198:5)",
+              "injectMetadataResources (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:131:3)",
+              "Object.synthesize (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
+              "App.synth (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "process.<anonymous> (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/app.ts:62:45)",
+              "Object.onceWrapper (node:events:514:26)",
+              "process.emit (node:events:394:28)",
+              "process.emit (node:domain:470:12)",
+              "process.emit (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/source-map-support/source-map-support.js:495:21)"
+            ]
+          }
+        ],
+        "/Link4VetsBeStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable",
+            "trace": [
+              "new MetadataResource (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:31:27)",
+              "/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:140:5",
+              "visit (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:202:5)",
+              "visit (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:198:5)",
+              "injectMetadataResources (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:131:3)",
+              "Object.synthesize (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
+              "App.synth (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "process.<anonymous> (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/@aws-cdk/core/lib/app.ts:62:45)",
+              "Object.onceWrapper (node:events:514:26)",
+              "process.emit (node:events:394:28)",
+              "process.emit (node:domain:470:12)",
+              "process.emit (/Users/pjgeutjens/Desktop/LINK4VETS/@repos/link4vets-be/node_modules/source-map-support/source-map-support.js:495:21)"
+            ]
+          }
+        ]
+      },
+      "displayName": "Link4VetsBeStack"
+    }
+  }
+}
