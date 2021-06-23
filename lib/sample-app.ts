@@ -5,7 +5,6 @@ import * as ec2 from '@aws-cdk/aws-ec2';
 import * as ecsp from '@aws-cdk/aws-ecs-patterns';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as apig from '@aws-cdk/aws-apigatewayv2';
-import { platform } from 'os';
 
 
 
@@ -35,7 +34,12 @@ export class SampleApp extends cdk.Construct {
           },
           containerPort: 80
         }
+
       });
+
+      fargateService.loadBalancer.addListener('sample', {
+        
+      })
 
       new cdk.CfnOutput(this, 'SampleAppHost', {
         value: fargateService.loadBalancer.loadBalancerDnsName,

@@ -1,0 +1,21 @@
+{
+  "trigger": true,
+  "modules": [
+    "verification-link"
+  ],
+  "parentResource": "portallink4vetsbee4dd0b29",
+  "functionName": "portallink4vetsbee4dd0b29CustomMessage",
+  "resourceName": "portallink4vetsbee4dd0b29CustomMessage",
+  "parentStack": "auth",
+  "triggerEnvs": "[\n  {\n    \"key\": \"RESOURCENAME\",\n    \"value\": \"resourceName\"\n  }\n]",
+  "triggerDir": "/snapshot/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/CustomMessage",
+  "triggerTemplate": "CustomMessage.json.ejs",
+  "triggerEventPath": "CustomMessage.event.json",
+  "roleName": "portallink4vetsbee4dd0b29CustomMessage",
+  "skipEdit": true,
+  "REDIRECTURL": "https://localhost:3030/secure/account",
+  "EMAILSUBJECT": "Link4Vets Account Confirmation",
+  "EMAILMESSAGE": "",
+  "RESOURCENAME": "resourceName",
+  "enableCors": false
+}

@@ -1,0 +1,107 @@
+type Invitation @model 
+  @key(name: "invitationsByReceiver", fields: ["receiver"], queryField: "invitationsByReceiver")
+  @key(name: "invitationsByReceiverEmail", fields: ["receiverEmail"], queryField: "invitationsByReceiverEmail")
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "sender", operations: [create, update, delete, read] }
+      { allow: owner, ownerField: "receiver", operations: [read] }
+      { allow: groups, groups: ["Admins"], queries: [get, list], mutations: [create, update, delete] }
+    ]
+  )
+{
+  id: ID!
+  sender: String
+  receiverEmail: String!
+  receiver: String
+  status: InvitationStatus
+}
+
+type Publication @model 
+@auth(
+    rules: [
+      { allow: owner, operations: [create, update, delete, read] }
+      { allow: groups, groups: ["Admins"], queries: [get, list], mutations: [create, update, delete] }
+      { allow: groups, groups: ["Readers"], queries: [get, list], mutations: null }
+    ]
+  ) {
+  id: ID!
+  description: String!
+  status: PublicationStatus
+  paymentInfo: PaymentInfo @connection
+  images: [Image] @connection
+  breeds: [PublicationBreeds] @connection(name: "BreedPublications")
+  type: PublicationType
+  litterPublicationInfo: LitterInfo @connection(fields:["id"])
+  adoptionPublicationInfo: AdoptionInfo @connection(fields:["id"])
+}
+
+type LitterInfo @model @key(fields:["publicationId"]) {
+  publicationId: ID!
+  birthDate: AWSDate!
+  males: Int!
+  females: Int!
+  motherPresent: Boolean!
+  fatherPresent: Boolean!
+  vaccinationInfo: String
+  price: Int!
+}
+
+type AdoptionInfo @model @key(fields:["publicationId"]) {
+  publicationId: ID!
+  birthDate: AWSDate
+  age: Int!
+  sex: String
+  vaccinationInfo: String
+}
+
+type PaymentInfo @model {
+  id: ID!
+  status: String!
+}
+
+type Breed @model {
+  id: ID!
+  name: String!
+  race: String!
+  publications: [PublicationBreeds] @connection(name: "PublicationBreeds")
+}
+
+type PublicationBreeds @model {
+  id: ID!
+  breed: Breed @connection(name: "PublicationBreeds")
+  publication: Publication @connection(name: "BreedPublications")
+}
+
+type Image @model
+{
+    id: ID!
+    publicationId: ID!
+    publication: Publication @connection
+    bucket: String!
+    fullsize: S3Object!
+    thumbnail: S3Object!
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+
+enum InvitationStatus {
+  open
+  closed
+  expired
+}
+
+enum PublicationStatus {
+  draft
+  published
+  expired
+}
+
+enum PublicationType {
+  LITTER
+  ADOPTION
+}

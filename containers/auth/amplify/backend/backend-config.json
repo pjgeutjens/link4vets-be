@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "portallink4vetsbee5eba14e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
