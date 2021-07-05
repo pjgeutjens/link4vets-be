@@ -6,6 +6,7 @@ import { SampleApp } from './sample-app'
 import { Tags } from '@aws-cdk/core';
 import * as s3Deploy from '@aws-cdk/aws-s3-deployment';
 import * as path from 'path';
+import { Domain } from './domain';
 
 
 export class Link4VetsBeStack extends cdk.Stack {
@@ -32,6 +33,11 @@ export class Link4VetsBeStack extends cdk.Stack {
     const networkingStack = new Networking(this, 'NetworkingConstruct', {
       mazAzs: 2
     })
+
+    const domain = new Domain(this, 'Domain', {
+      domainName: 'link4vetsportal.be',
+      domainCertificateArn: 
+    } )
 
     Tags.of(networkingStack).add('Module', 'Networking')
 

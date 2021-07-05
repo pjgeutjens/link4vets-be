@@ -12,7 +12,7 @@ export class Networking extends cdk.Construct {
     constructor(scope: cdk.Construct, id: string, props: NetworkingProps) {
         super(scope, id);
 
-        const vpc = new ec2.Vpc(this, 'AppVPC', {
+        this.vpc = new ec2.Vpc(this, 'AppVPC', {
             cidr: '10.0.0.0/16',
             maxAzs: props.mazAzs,
             subnetConfiguration: [
