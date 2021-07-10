@@ -11,7 +11,6 @@ import * as apig from '@aws-cdk/aws-apigatewayv2';
 
 interface FargateClusterProps {
   vpc: ec2.IVpc
-  api: apig.HttpApi
 }
 
 export class FargateCluster extends cdk.Construct {

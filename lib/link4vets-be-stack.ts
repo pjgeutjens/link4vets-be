@@ -44,7 +44,6 @@ export class Link4VetsBeStack extends cdk.Stack {
 
     const sampleApp = new FargateCluster(this, 'Fargate', {
       vpc: networkingStack.vpc,
-      api: api.httpApi
     })
 
     Tags.of(sampleApp).add('Module', 'SampleApp')
