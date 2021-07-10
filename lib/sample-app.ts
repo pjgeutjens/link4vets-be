@@ -5,7 +5,7 @@ import * as ec2 from '@aws-cdk/aws-ec2';
 import * as ecsp from '@aws-cdk/aws-ecs-patterns';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as apig from '@aws-cdk/aws-apigatewayv2';
-import { HostedZone, HostedZone } from '@aws-cdk/aws-route53';
+import { HostedZone } from '@aws-cdk/aws-route53';
 
 
 
