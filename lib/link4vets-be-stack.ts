@@ -36,11 +36,11 @@ export class Link4VetsBeStack extends cdk.Stack {
 
     Tags.of(networkingStack).add('Module', 'Networking')
 
-    const api = new DocumentManagementAPI(this, 'DocumentManagementApi', {
-      documentBucket: bucket
-    });
+    // const api = new DocumentManagementAPI(this, 'DocumentManagementApi', {
+    //   documentBucket: bucket
+    // });
 
-    Tags.of(api).add('Module', 'API')
+    // Tags.of(api).add('Module', 'API')
 
     const sampleApp = new FargateCluster(this, 'Fargate', {
       vpc: networkingStack.vpc,
