@@ -5,9 +5,9 @@ export const amplifyConfig = {
   aws_user_pools_id: process.env.REACT_APP_AWS_USER_POOLS_ID,
   aws_user_pools_web_client_id: process.env.REACT_APP_AWS_USER_POOLS_WEB_CLIENT_ID,
   cookieStorage: {
-    domain: process.env.REACT_APP_AWS_COGNITO_COOKIE_DOMAIN,
-    secure: process.env.REACT_APP_AWS_COGNITO_COOKIE_SECURE,
-    path: process.env.REACT_APP_AWS_COGNITO_COOKIE_PATH,
+    domain: "link4vetsportal.be",
+    secure: true,
+    path: '/',
     expires: 7,
   },
 };
