@@ -43,6 +43,7 @@ export class FargateCluster extends cdk.Construct {
         assignPublicIp: true,
         domainName: "auth.link4vetsportal.be",     
         domainZone: zone,
+        serviceName: 'link4vets-auth',
         taskImageOptions: {
           image: ecs.ContainerImage.fromDockerImageAsset(authApp),
           environment: {
@@ -64,7 +65,9 @@ export class FargateCluster extends cdk.Construct {
 
       const landingService = new ecsp.ApplicationLoadBalancedFargateService(this, 'LandingService', {
         cluster: fargateService.cluster,
+        listenerPort: 8080,
         loadBalancer: fargateService.loadBalancer,
+        serviceName: 'link4vets-landing',
         domainName: "landing.link4vetsportal.be",
         domainZone: zone,
         assignPublicIp: true,
