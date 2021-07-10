@@ -2,7 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import { Bucket, BucketEncryption } from '@aws-cdk/aws-s3';
 import { Networking } from './networking'
 import { DocumentManagementAPI } from './api';
-import { SampleApp } from './sample-app'
+import { FargateCluster } from './sample-app'
 import { Tags } from '@aws-cdk/core';
 import * as s3Deploy from '@aws-cdk/aws-s3-deployment';
 import * as path from 'path';
@@ -34,11 +34,6 @@ export class Link4VetsBeStack extends cdk.Stack {
       mazAzs: 2
     })
 
-    const domain = new Domain(this, 'Domain', {
-      domainName: 'link4vetsportal.be',
-      domainCertificateArn: 
-    } )
-
     Tags.of(networkingStack).add('Module', 'Networking')
 
     const api = new DocumentManagementAPI(this, 'DocumentManagementApi', {
@@ -47,7 +42,7 @@ export class Link4VetsBeStack extends cdk.Stack {
 
     Tags.of(api).add('Module', 'API')
 
-    const sampleApp = new SampleApp(this, 'SampleApp', {
+    const sampleApp = new FargateCluster(this, 'Fargate', {
       vpc: networkingStack.vpc,
       api: api.httpApi
     })
