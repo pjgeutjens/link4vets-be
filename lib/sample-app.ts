@@ -5,6 +5,7 @@ import * as ec2 from '@aws-cdk/aws-ec2';
 import * as ecsp from '@aws-cdk/aws-ecs-patterns';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as apig from '@aws-cdk/aws-apigatewayv2';
+import { HostedZone, HostedZone } from '@aws-cdk/aws-route53';
 
 
 
@@ -20,6 +21,7 @@ export class FargateCluster extends cdk.Construct {
 
       const authApp = new DockerImageAsset(this, 'Auth', {
         directory: path.join(__dirname, '..', 'containers', 'auth'),
+
       });
 
       const landingApp = new DockerImageAsset(this, 'Landing', {
@@ -30,11 +32,17 @@ export class FargateCluster extends cdk.Construct {
         directory: path.join(__dirname, '..', 'containers', 'sample1'),
       });
 
+      const zone = new HostedZone(this, "link4vetsportal", {
+        zoneName: "link4vetsportal.be",
+      })
+
 
 
       const fargateService = new ecsp.ApplicationLoadBalancedFargateService(this, 'AuthService', {
         vpc: props.vpc,
-        
+        assignPublicIp: true,
+        domainName: "auth.link4vetsportal.be",     
+        domainZone: zone,
         taskImageOptions: {
           image: ecs.ContainerImage.fromDockerImageAsset(authApp),
           environment: {
@@ -56,6 +64,10 @@ export class FargateCluster extends cdk.Construct {
 
       const landingService = new ecsp.ApplicationLoadBalancedFargateService(this, 'LandingService', {
         cluster: fargateService.cluster,
+        loadBalancer: fargateService.loadBalancer,
+        domainName: "landing.link4vetsportal.be",
+        domainZone: zone,
+        assignPublicIp: true,
         taskImageOptions: {
           image: ecs.ContainerImage.fromDockerImageAsset(landingApp),
           environment: {
