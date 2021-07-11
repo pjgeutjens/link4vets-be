@@ -49,7 +49,7 @@ export class FargateCluster extends cdk.Construct {
         REACT_APP_AWS_COGNITO_COOKIE_SECURE:"true",
         REACT_APP_AWS_COGNITO_COOKIE_PATH:"/",
         REACT_APP_AWS_COGNITO_COOKIE_EXPIRES:"7"
-      },
+      }
 
 
       const fargateService = new ecsp.ApplicationLoadBalancedFargateService(this, 'AuthService', {
