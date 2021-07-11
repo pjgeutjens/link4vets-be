@@ -92,12 +92,6 @@ const Login: FC = () => {
                   >
                     Log in
                   </Typography>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                  >
-                    Log in on the internal platform
-                  </Typography>
                 </div>
                 <Box
                   sx={{

@@ -20,8 +20,8 @@ const LoginAmplify: FC = (props) => {
   return (
     <Formik
       initialValues={{
-        email: 'demo@devias.io',
-        password: 'Password123!',
+        email: '',
+        password: '',
         submit: null
       }}
       validationSchema={
