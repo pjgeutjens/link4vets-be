@@ -1,0 +1,636 @@
+type Invitation {
+  id: ID!
+  sender: String
+  receiverEmail: String!
+  receiver: String
+  status: InvitationStatus
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Publication {
+  id: ID!
+  description: String!
+  status: PublicationStatus
+  paymentInfo: PaymentInfo
+  images(filter: ModelImageFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelImageConnection
+  breeds(filter: ModelPublicationBreedsFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPublicationBreedsConnection
+  type: PublicationType
+  litterPublicationInfo: LitterInfo
+  adoptionPublicationInfo: AdoptionInfo
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+type LitterInfo {
+  publicationId: ID!
+  birthDate: AWSDate!
+  males: Int!
+  females: Int!
+  motherPresent: Boolean!
+  fatherPresent: Boolean!
+  vaccinationInfo: String
+  price: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type AdoptionInfo {
+  publicationId: ID!
+  birthDate: AWSDate
+  age: Int!
+  sex: String
+  vaccinationInfo: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type PaymentInfo {
+  id: ID!
+  status: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Breed {
+  id: ID!
+  name: String!
+  race: String!
+  publications(filter: ModelPublicationBreedsFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPublicationBreedsConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type PublicationBreeds {
+  id: ID!
+  breed: Breed
+  publication: Publication
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Image {
+  id: ID!
+  publicationId: ID!
+  publication: Publication
+  bucket: String!
+  fullsize: S3Object!
+  thumbnail: S3Object!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+enum InvitationStatus {
+  open
+  closed
+  expired
+}
+
+enum PublicationStatus {
+  draft
+  published
+  expired
+}
+
+enum PublicationType {
+  LITTER
+  ADOPTION
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelInvitationConnection {
+  items: [Invitation]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelInvitationStatusInput {
+  eq: InvitationStatus
+  ne: InvitationStatus
+}
+
+input ModelInvitationFilterInput {
+  id: ModelIDInput
+  sender: ModelStringInput
+  receiverEmail: ModelStringInput
+  receiver: ModelStringInput
+  status: ModelInvitationStatusInput
+  and: [ModelInvitationFilterInput]
+  or: [ModelInvitationFilterInput]
+  not: ModelInvitationFilterInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Query {
+  getInvitation(id: ID!): Invitation
+  listInvitations(filter: ModelInvitationFilterInput, limit: Int, nextToken: String): ModelInvitationConnection
+  getPublication(id: ID!): Publication
+  listPublications(filter: ModelPublicationFilterInput, limit: Int, nextToken: String): ModelPublicationConnection
+  getLitterInfo(publicationId: ID!): LitterInfo
+  listLitterInfos(publicationId: ID, filter: ModelLitterInfoFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelLitterInfoConnection
+  getAdoptionInfo(publicationId: ID!): AdoptionInfo
+  listAdoptionInfos(publicationId: ID, filter: ModelAdoptionInfoFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelAdoptionInfoConnection
+  getPaymentInfo(id: ID!): PaymentInfo
+  listPaymentInfos(filter: ModelPaymentInfoFilterInput, limit: Int, nextToken: String): ModelPaymentInfoConnection
+  getBreed(id: ID!): Breed
+  listBreeds(filter: ModelBreedFilterInput, limit: Int, nextToken: String): ModelBreedConnection
+  getPublicationBreeds(id: ID!): PublicationBreeds
+  listPublicationBreedss(filter: ModelPublicationBreedsFilterInput, limit: Int, nextToken: String): ModelPublicationBreedsConnection
+  getImage(id: ID!): Image
+  listImages(filter: ModelImageFilterInput, limit: Int, nextToken: String): ModelImageConnection
+  invitationsByReceiver(receiver: String, sortDirection: ModelSortDirection, filter: ModelInvitationFilterInput, limit: Int, nextToken: String): ModelInvitationConnection
+  invitationsByReceiverEmail(receiverEmail: String, sortDirection: ModelSortDirection, filter: ModelInvitationFilterInput, limit: Int, nextToken: String): ModelInvitationConnection
+}
+
+input CreateInvitationInput {
+  id: ID
+  sender: String
+  receiverEmail: String!
+  receiver: String
+  status: InvitationStatus
+}
+
+input UpdateInvitationInput {
+  id: ID!
+  sender: String
+  receiverEmail: String
+  receiver: String
+  status: InvitationStatus
+}
+
+input DeleteInvitationInput {
+  id: ID
+}
+
+type Mutation {
+  createInvitation(input: CreateInvitationInput!, condition: ModelInvitationConditionInput): Invitation
+  updateInvitation(input: UpdateInvitationInput!, condition: ModelInvitationConditionInput): Invitation
+  deleteInvitation(input: DeleteInvitationInput!, condition: ModelInvitationConditionInput): Invitation
+  createPublication(input: CreatePublicationInput!, condition: ModelPublicationConditionInput): Publication
+  updatePublication(input: UpdatePublicationInput!, condition: ModelPublicationConditionInput): Publication
+  deletePublication(input: DeletePublicationInput!, condition: ModelPublicationConditionInput): Publication
+  createLitterInfo(input: CreateLitterInfoInput!, condition: ModelLitterInfoConditionInput): LitterInfo
+  updateLitterInfo(input: UpdateLitterInfoInput!, condition: ModelLitterInfoConditionInput): LitterInfo
+  deleteLitterInfo(input: DeleteLitterInfoInput!, condition: ModelLitterInfoConditionInput): LitterInfo
+  createAdoptionInfo(input: CreateAdoptionInfoInput!, condition: ModelAdoptionInfoConditionInput): AdoptionInfo
+  updateAdoptionInfo(input: UpdateAdoptionInfoInput!, condition: ModelAdoptionInfoConditionInput): AdoptionInfo
+  deleteAdoptionInfo(input: DeleteAdoptionInfoInput!, condition: ModelAdoptionInfoConditionInput): AdoptionInfo
+  createPaymentInfo(input: CreatePaymentInfoInput!, condition: ModelPaymentInfoConditionInput): PaymentInfo
+  updatePaymentInfo(input: UpdatePaymentInfoInput!, condition: ModelPaymentInfoConditionInput): PaymentInfo
+  deletePaymentInfo(input: DeletePaymentInfoInput!, condition: ModelPaymentInfoConditionInput): PaymentInfo
+  createBreed(input: CreateBreedInput!, condition: ModelBreedConditionInput): Breed
+  updateBreed(input: UpdateBreedInput!, condition: ModelBreedConditionInput): Breed
+  deleteBreed(input: DeleteBreedInput!, condition: ModelBreedConditionInput): Breed
+  createPublicationBreeds(input: CreatePublicationBreedsInput!, condition: ModelPublicationBreedsConditionInput): PublicationBreeds
+  updatePublicationBreeds(input: UpdatePublicationBreedsInput!, condition: ModelPublicationBreedsConditionInput): PublicationBreeds
+  deletePublicationBreeds(input: DeletePublicationBreedsInput!, condition: ModelPublicationBreedsConditionInput): PublicationBreeds
+  createImage(input: CreateImageInput!, condition: ModelImageConditionInput): Image
+  updateImage(input: UpdateImageInput!, condition: ModelImageConditionInput): Image
+  deleteImage(input: DeleteImageInput!, condition: ModelImageConditionInput): Image
+}
+
+input ModelInvitationConditionInput {
+  receiverEmail: ModelStringInput
+  status: ModelInvitationStatusInput
+  and: [ModelInvitationConditionInput]
+  or: [ModelInvitationConditionInput]
+  not: ModelInvitationConditionInput
+}
+
+type Subscription {
+  onCreateInvitation(sender: String!, receiver: String!): Invitation @aws_subscribe(mutations: ["createInvitation"])
+  onUpdateInvitation(sender: String!, receiver: String!): Invitation @aws_subscribe(mutations: ["updateInvitation"])
+  onDeleteInvitation(sender: String!, receiver: String!): Invitation @aws_subscribe(mutations: ["deleteInvitation"])
+  onCreatePublication(owner: String!): Publication @aws_subscribe(mutations: ["createPublication"])
+  onUpdatePublication(owner: String!): Publication @aws_subscribe(mutations: ["updatePublication"])
+  onDeletePublication(owner: String!): Publication @aws_subscribe(mutations: ["deletePublication"])
+  onCreateLitterInfo: LitterInfo @aws_subscribe(mutations: ["createLitterInfo"])
+  onUpdateLitterInfo: LitterInfo @aws_subscribe(mutations: ["updateLitterInfo"])
+  onDeleteLitterInfo: LitterInfo @aws_subscribe(mutations: ["deleteLitterInfo"])
+  onCreateAdoptionInfo: AdoptionInfo @aws_subscribe(mutations: ["createAdoptionInfo"])
+  onUpdateAdoptionInfo: AdoptionInfo @aws_subscribe(mutations: ["updateAdoptionInfo"])
+  onDeleteAdoptionInfo: AdoptionInfo @aws_subscribe(mutations: ["deleteAdoptionInfo"])
+  onCreatePaymentInfo: PaymentInfo @aws_subscribe(mutations: ["createPaymentInfo"])
+  onUpdatePaymentInfo: PaymentInfo @aws_subscribe(mutations: ["updatePaymentInfo"])
+  onDeletePaymentInfo: PaymentInfo @aws_subscribe(mutations: ["deletePaymentInfo"])
+  onCreateBreed: Breed @aws_subscribe(mutations: ["createBreed"])
+  onUpdateBreed: Breed @aws_subscribe(mutations: ["updateBreed"])
+  onDeleteBreed: Breed @aws_subscribe(mutations: ["deleteBreed"])
+  onCreatePublicationBreeds: PublicationBreeds @aws_subscribe(mutations: ["createPublicationBreeds"])
+  onUpdatePublicationBreeds: PublicationBreeds @aws_subscribe(mutations: ["updatePublicationBreeds"])
+  onDeletePublicationBreeds: PublicationBreeds @aws_subscribe(mutations: ["deletePublicationBreeds"])
+  onCreateImage: Image @aws_subscribe(mutations: ["createImage"])
+  onUpdateImage: Image @aws_subscribe(mutations: ["updateImage"])
+  onDeleteImage: Image @aws_subscribe(mutations: ["deleteImage"])
+}
+
+type ModelPublicationConnection {
+  items: [Publication]
+  nextToken: String
+}
+
+input ModelPublicationStatusInput {
+  eq: PublicationStatus
+  ne: PublicationStatus
+}
+
+input ModelPublicationTypeInput {
+  eq: PublicationType
+  ne: PublicationType
+}
+
+input ModelPublicationFilterInput {
+  id: ModelIDInput
+  description: ModelStringInput
+  status: ModelPublicationStatusInput
+  type: ModelPublicationTypeInput
+  and: [ModelPublicationFilterInput]
+  or: [ModelPublicationFilterInput]
+  not: ModelPublicationFilterInput
+}
+
+input CreatePublicationInput {
+  id: ID
+  description: String!
+  status: PublicationStatus
+  type: PublicationType
+  publicationPaymentInfoId: ID
+}
+
+input UpdatePublicationInput {
+  id: ID!
+  description: String
+  status: PublicationStatus
+  type: PublicationType
+  publicationPaymentInfoId: ID
+}
+
+input DeletePublicationInput {
+  id: ID
+}
+
+input ModelPublicationConditionInput {
+  description: ModelStringInput
+  status: ModelPublicationStatusInput
+  type: ModelPublicationTypeInput
+  and: [ModelPublicationConditionInput]
+  or: [ModelPublicationConditionInput]
+  not: ModelPublicationConditionInput
+}
+
+type ModelLitterInfoConnection {
+  items: [LitterInfo]
+  nextToken: String
+}
+
+input ModelLitterInfoFilterInput {
+  publicationId: ModelIDInput
+  birthDate: ModelStringInput
+  males: ModelIntInput
+  females: ModelIntInput
+  motherPresent: ModelBooleanInput
+  fatherPresent: ModelBooleanInput
+  vaccinationInfo: ModelStringInput
+  price: ModelIntInput
+  and: [ModelLitterInfoFilterInput]
+  or: [ModelLitterInfoFilterInput]
+  not: ModelLitterInfoFilterInput
+}
+
+input CreateLitterInfoInput {
+  publicationId: ID!
+  birthDate: AWSDate!
+  males: Int!
+  females: Int!
+  motherPresent: Boolean!
+  fatherPresent: Boolean!
+  vaccinationInfo: String
+  price: Int!
+}
+
+input UpdateLitterInfoInput {
+  publicationId: ID!
+  birthDate: AWSDate
+  males: Int
+  females: Int
+  motherPresent: Boolean
+  fatherPresent: Boolean
+  vaccinationInfo: String
+  price: Int
+}
+
+input DeleteLitterInfoInput {
+  publicationId: ID!
+}
+
+input ModelLitterInfoConditionInput {
+  birthDate: ModelStringInput
+  males: ModelIntInput
+  females: ModelIntInput
+  motherPresent: ModelBooleanInput
+  fatherPresent: ModelBooleanInput
+  vaccinationInfo: ModelStringInput
+  price: ModelIntInput
+  and: [ModelLitterInfoConditionInput]
+  or: [ModelLitterInfoConditionInput]
+  not: ModelLitterInfoConditionInput
+}
+
+type ModelAdoptionInfoConnection {
+  items: [AdoptionInfo]
+  nextToken: String
+}
+
+input ModelAdoptionInfoFilterInput {
+  publicationId: ModelIDInput
+  birthDate: ModelStringInput
+  age: ModelIntInput
+  sex: ModelStringInput
+  vaccinationInfo: ModelStringInput
+  and: [ModelAdoptionInfoFilterInput]
+  or: [ModelAdoptionInfoFilterInput]
+  not: ModelAdoptionInfoFilterInput
+}
+
+input CreateAdoptionInfoInput {
+  publicationId: ID!
+  birthDate: AWSDate
+  age: Int!
+  sex: String
+  vaccinationInfo: String
+}
+
+input UpdateAdoptionInfoInput {
+  publicationId: ID!
+  birthDate: AWSDate
+  age: Int
+  sex: String
+  vaccinationInfo: String
+}
+
+input DeleteAdoptionInfoInput {
+  publicationId: ID!
+}
+
+input ModelAdoptionInfoConditionInput {
+  birthDate: ModelStringInput
+  age: ModelIntInput
+  sex: ModelStringInput
+  vaccinationInfo: ModelStringInput
+  and: [ModelAdoptionInfoConditionInput]
+  or: [ModelAdoptionInfoConditionInput]
+  not: ModelAdoptionInfoConditionInput
+}
+
+type ModelPaymentInfoConnection {
+  items: [PaymentInfo]
+  nextToken: String
+}
+
+input ModelPaymentInfoFilterInput {
+  id: ModelIDInput
+  status: ModelStringInput
+  and: [ModelPaymentInfoFilterInput]
+  or: [ModelPaymentInfoFilterInput]
+  not: ModelPaymentInfoFilterInput
+}
+
+input CreatePaymentInfoInput {
+  id: ID
+  status: String!
+}
+
+input UpdatePaymentInfoInput {
+  id: ID!
+  status: String
+}
+
+input DeletePaymentInfoInput {
+  id: ID
+}
+
+input ModelPaymentInfoConditionInput {
+  status: ModelStringInput
+  and: [ModelPaymentInfoConditionInput]
+  or: [ModelPaymentInfoConditionInput]
+  not: ModelPaymentInfoConditionInput
+}
+
+type ModelBreedConnection {
+  items: [Breed]
+  nextToken: String
+}
+
+input ModelBreedFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  race: ModelStringInput
+  and: [ModelBreedFilterInput]
+  or: [ModelBreedFilterInput]
+  not: ModelBreedFilterInput
+}
+
+input CreateBreedInput {
+  id: ID
+  name: String!
+  race: String!
+}
+
+input UpdateBreedInput {
+  id: ID!
+  name: String
+  race: String
+}
+
+input DeleteBreedInput {
+  id: ID
+}
+
+input ModelBreedConditionInput {
+  name: ModelStringInput
+  race: ModelStringInput
+  and: [ModelBreedConditionInput]
+  or: [ModelBreedConditionInput]
+  not: ModelBreedConditionInput
+}
+
+type ModelPublicationBreedsConnection {
+  items: [PublicationBreeds]
+  nextToken: String
+}
+
+input ModelPublicationBreedsFilterInput {
+  id: ModelIDInput
+  and: [ModelPublicationBreedsFilterInput]
+  or: [ModelPublicationBreedsFilterInput]
+  not: ModelPublicationBreedsFilterInput
+}
+
+input CreatePublicationBreedsInput {
+  id: ID
+  publicationBreedsBreedId: ID
+  publicationBreedsPublicationId: ID
+}
+
+input UpdatePublicationBreedsInput {
+  id: ID!
+  publicationBreedsBreedId: ID
+  publicationBreedsPublicationId: ID
+}
+
+input DeletePublicationBreedsInput {
+  id: ID
+}
+
+input ModelPublicationBreedsConditionInput {
+  and: [ModelPublicationBreedsConditionInput]
+  or: [ModelPublicationBreedsConditionInput]
+  not: ModelPublicationBreedsConditionInput
+}
+
+input S3ObjectInput {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+type ModelImageConnection {
+  items: [Image]
+  nextToken: String
+}
+
+input ModelImageFilterInput {
+  id: ModelIDInput
+  publicationId: ModelIDInput
+  bucket: ModelStringInput
+  and: [ModelImageFilterInput]
+  or: [ModelImageFilterInput]
+  not: ModelImageFilterInput
+}
+
+input CreateImageInput {
+  id: ID
+  publicationId: ID!
+  bucket: String!
+  fullsize: S3ObjectInput!
+  thumbnail: S3ObjectInput!
+  publicationImagesId: ID
+  imagePublicationId: ID
+}
+
+input UpdateImageInput {
+  id: ID!
+  publicationId: ID
+  bucket: String
+  fullsize: S3ObjectInput
+  thumbnail: S3ObjectInput
+  publicationImagesId: ID
+  imagePublicationId: ID
+}
+
+input DeleteImageInput {
+  id: ID
+}
+
+input ModelImageConditionInput {
+  publicationId: ModelIDInput
+  bucket: ModelStringInput
+  and: [ModelImageConditionInput]
+  or: [ModelImageConditionInput]
+  not: ModelImageConditionInput
+}

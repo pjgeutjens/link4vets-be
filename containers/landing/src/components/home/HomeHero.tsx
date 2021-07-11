@@ -56,7 +56,7 @@ const HomeHero: FC = (props) => {
           color="textPrimary"
           variant="h3"
         >
-          Link4Vets APP
+          Link4Vets LANDING PAGE
         </Typography>
         <Typography
           align="center"

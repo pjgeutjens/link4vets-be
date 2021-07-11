@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "link4vetspublications",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authportallink4vetsbee4dd0b29",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

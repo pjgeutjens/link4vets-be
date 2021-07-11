@@ -1,0 +1,11 @@
+#if( $util.isNull($ctx.source.id) )
+  #return
+#else
+{
+      "version": "2018-05-29",
+      "operation": "GetItem",
+      "key": {
+          "publicationId": $util.dynamodb.toDynamoDBJson($util.defaultIfNullOrBlank($ctx.source.id, "___xamznone____"))
+    }
+  }
+#end

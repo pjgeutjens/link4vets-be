@@ -2,7 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import { Bucket, BucketEncryption } from '@aws-cdk/aws-s3';
 import { Networking } from './networking'
 import { DocumentManagementAPI } from './api';
-import { FargateCluster } from './sample-app'
+import { FargateCluster } from './fargate
 import { Tags } from '@aws-cdk/core';
 import * as s3Deploy from '@aws-cdk/aws-s3-deployment';
 import * as path from 'path';

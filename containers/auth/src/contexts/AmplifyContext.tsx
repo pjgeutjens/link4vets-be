@@ -6,7 +6,6 @@ import { amplifyConfig } from '../config';
 import type { User } from '../types/user';
 
 Amplify.configure(amplifyConfig);
-console.log(Auth.configure());
 
 interface State {
   isInitialized: boolean;
@@ -178,6 +177,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
 
   const login = async (email: string, password: string): Promise<void> => {
     const user = await Auth.signIn(email, password);
+    console.log(user)
 
     if (user.challengeName) {
       console.error(`Unable to login, because challenge "${user.challengeName}" is mandated and we did not handle this case.`);

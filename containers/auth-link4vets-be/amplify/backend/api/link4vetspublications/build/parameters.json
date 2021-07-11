@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "link4vetspublications",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authportallink4vetsbee4dd0b29",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "S3DeploymentBucket": "amplify-portallink4vetsbe-dev-131033-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/18fec24fa35473d414c377b3e8595d53698683b8"
+}

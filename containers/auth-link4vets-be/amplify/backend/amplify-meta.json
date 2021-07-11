@@ -1,0 +1,186 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-portallink4vetsbe-dev-131033-authRole",
+            "UnauthRoleArn": "arn:aws:iam::781382135117:role/amplify-portallink4vetsbe-dev-131033-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::781382135117:role/amplify-portallink4vetsbe-dev-131033-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "amplify-portallink4vetsbe-dev-131033-deployment",
+            "UnauthRoleName": "amplify-portallink4vetsbe-dev-131033-unauthRole",
+            "StackName": "amplify-portallink4vetsbe-dev-131033",
+            "StackId": "arn:aws:cloudformation:eu-central-1:781382135117:stack/amplify-portallink4vetsbe-dev-131033/58bb4410-b180-11eb-9926-0ad1bb830c16",
+            "AmplifyAppId": "d15g0fd7g7ow1c"
+        }
+    },
+    "function": {
+        "portallink4vetsbee4dd0b29CustomMessage": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda",
+            "lastBuildTimeStamp": "2021-05-10T11:43:33.752Z",
+            "lastPackageTimeStamp": "2021-05-10T11:43:33.984Z",
+            "distZipFilename": "portallink4vetsbee4dd0b29CustomMessage-4a485051446533333330-build.zip",
+            "s3Bucket": {
+                "deploymentBucketName": "amplify-portallink4vetsbe-dev-131033-deployment",
+                "s3Key": "amplify-builds/portallink4vetsbee4dd0b29CustomMessage-4a485051446533333330-build.zip"
+            },
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-portallink4vetsbe-dev-131033-deployment/amplify-cfn-templates/function/portallink4vetsbee4dd0b29CustomMessage-cloudformation-template.json",
+                "logicalId": "functionportallink4vetsbee4dd0b29CustomMessage"
+            },
+            "lastPushTimeStamp": "2021-05-10T11:58:15.644Z",
+            "output": {
+                "Region": "eu-central-1",
+                "Arn": "arn:aws:lambda:eu-central-1:781382135117:function:portallink4vetsbee4dd0b29CustomMessage-dev",
+                "Name": "portallink4vetsbee4dd0b29CustomMessage-dev",
+                "LambdaExecutionRole": "portallink4vetsbee4dd0b29CustomMessage-dev"
+            },
+            "lastPushDirHash": "f33XqgrsCu93vGI6l99oaByDWhI="
+        },
+        "AdminQueries0add4a7e": {
+            "service": "Lambda",
+            "providerPlugin": "awscloudformation",
+            "build": true,
+            "dependsOn": [
+                {
+                    "category": "auth",
+                    "resourceName": "portallink4vetsbee4dd0b29",
+                    "attributes": [
+                        "UserPoolId"
+                    ]
+                }
+            ],
+            "lastBuildTimeStamp": "2021-05-10T11:43:33.753Z",
+            "lastPackageTimeStamp": "2021-05-10T11:43:35.914Z",
+            "distZipFilename": "AdminQueries0add4a7e-67794261486b6d636847-build.zip",
+            "s3Bucket": {
+                "deploymentBucketName": "amplify-portallink4vetsbe-dev-131033-deployment",
+                "s3Key": "amplify-builds/AdminQueries0add4a7e-67794261486b6d636847-build.zip"
+            },
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-portallink4vetsbe-dev-131033-deployment/amplify-cfn-templates/function/AdminQueries0add4a7e-cloudformation-template.json",
+                "logicalId": "functionAdminQueries0add4a7e"
+            },
+            "lastPushTimeStamp": "2021-05-10T11:58:15.644Z",
+            "output": {
+                "Region": "eu-central-1",
+                "Arn": "arn:aws:lambda:eu-central-1:781382135117:function:AdminQueries0add4a7e-dev",
+                "Name": "AdminQueries0add4a7e-dev",
+                "LambdaExecutionRole": "AdminQueries0add4a7eLambdaRole-dev"
+            },
+            "lastPushDirHash": "D1p2SqBpO9816WXhsTTbuGtBViw="
+        }
+    },
+    "auth": {
+        "portallink4vetsbee4dd0b29": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "portallink4vetsbee4dd0b29CustomMessage",
+                    "triggerProvider": "Cognito",
+                    "attributes": [
+                        "Arn",
+                        "Name"
+                    ]
+                }
+            ],
+            "customAuth": false,
+            "lastPushTimeStamp": "2021-05-10T11:58:15.644Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-portallink4vetsbe-dev-131033-deployment/amplify-cfn-templates/auth/portallink4vetsbee4dd0b29-cloudformation-template.yml",
+                "logicalId": "authportallink4vetsbee4dd0b29"
+            },
+            "output": {
+                "UserPoolId": "eu-central-1_9RFaWebkP",
+                "AppClientIDWeb": "487bsi5d1shed2dvhgvvcm0daq",
+                "AppClientID": "46fe5t3p73fphf6dm72kkqsv78",
+                "IdentityPoolId": "eu-central-1:3916df2b-0640-45b9-95e7-f58c7a8f7777",
+                "IdentityPoolName": "portallink4vetsbee4dd0b29_identitypool_e4dd0b29__dev",
+                "UserPoolName": "portallink4vetsbee4dd0b29_userpool_e4dd0b29"
+            },
+            "lastPushDirHash": "mYn48bcWPsaEQBrFN0IdOKqwXUc="
+        }
+    },
+    "api": {
+        "link4vetspublications": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                            "userPoolId": "authportallink4vetsbee4dd0b29"
+                        }
+                    },
+                    "additionalAuthenticationProviders": []
+                },
+                "GraphQLAPIIdOutput": "r4nvzoo3lbgzldgzbtqhjw3guu",
+                "GraphQLAPIEndpointOutput": "https://yhgcpjdctvcsbolc55qqdjyg6a.appsync-api.eu-central-1.amazonaws.com/graphql"
+            },
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-portallink4vetsbe-dev-131033-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apilink4vetspublications"
+            },
+            "lastPushTimeStamp": "2021-05-10T11:58:15.644Z",
+            "lastPushDirHash": "V2LMi+Ba0ZuulrS/oBbAgoQblw0="
+        },
+        "AdminQueries": {
+            "service": "API Gateway",
+            "providerPlugin": "awscloudformation",
+            "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+            "dependsOn": [
+                {
+                    "category": "auth",
+                    "resourceName": "portallink4vetsbee4dd0b29",
+                    "attributes": [
+                        "UserPoolId"
+                    ]
+                },
+                {
+                    "category": "function",
+                    "resourceName": "AdminQueries0add4a7e",
+                    "attributes": [
+                        "Arn",
+                        "Name"
+                    ]
+                }
+            ],
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-portallink4vetsbe-dev-131033-deployment/amplify-cfn-templates/api/admin-queries-cloudformation-template.json",
+                "logicalId": "apiAdminQueries"
+            },
+            "lastPushTimeStamp": "2021-05-10T11:58:15.644Z",
+            "output": {
+                "ApiName": "AdminQueries",
+                "RootUrl": "https://rcs1lnfp18.execute-api.eu-central-1.amazonaws.com/dev",
+                "ApiId": "rcs1lnfp18"
+            },
+            "lastPushDirHash": "3kbjTEkb+DA/DFskMLY1z+t3LYw="
+        },
+        "link4vetspublications-dev": {
+            "service": "AppSync",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS"
+                    },
+                    "additionalAuthenticationProviders": null,
+                    "userPoolConfig": {
+                        "userPoolId": "eu-central-1_9RFaWebkP",
+                        "awsRegion": "eu-central-1",
+                        "defaultAction": "ALLOW",
+                        "appIdClientRegex": null
+                    }
+                },
+                "GraphQLAPIIdOutput": "r4nvzoo3lbgzldgzbtqhjw3guu",
+                "GraphQLAPIEndpointOutput": "https://yhgcpjdctvcsbolc55qqdjyg6a.appsync-api.eu-central-1.amazonaws.com/graphql",
+                "name": "link4vetspublications-dev",
+                "region": "eu-central-1"
+            },
+            "lastPushTimeStamp": "2021-05-11T05:24:24.116Z"
+        }
+    }
+}

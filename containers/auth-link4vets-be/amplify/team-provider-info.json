@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-portallink4vetsbe-dev-70043-authRole",
+      "UnauthRoleArn": "arn:aws:iam::781382135117:role/amplify-portallink4vetsbe-dev-70043-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::781382135117:role/amplify-portallink4vetsbe-dev-70043-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-portallink4vetsbe-dev-70043-deployment",
+      "UnauthRoleName": "amplify-portallink4vetsbe-dev-70043-unauthRole",
+      "StackName": "amplify-portallink4vetsbe-dev-70043",
+      "StackId": "arn:aws:cloudformation:eu-central-1:781382135117:stack/amplify-portallink4vetsbe-dev-70043/591ad280-afba-11eb-bf14-069a0cffc5c0",
+      "AmplifyAppId": "d2j7qrgat0oq63"
+    },
+    "categories": {
+      "auth": {
+        "portallink4vetsbee5eba14e": {}
+      }
+    }
+  }
+}
